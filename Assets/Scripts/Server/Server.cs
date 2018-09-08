@@ -2,6 +2,12 @@
 
 public class Server : Photon.MonoBehaviour
 {
+    public static Server Instance;
+    public AirplaneController airplaneController;
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -29,7 +35,7 @@ public class Server : Photon.MonoBehaviour
         PhotonNetwork.player.SetCustomProperties(cp);
         foreach (var player in PhotonNetwork.playerList)
         {
-            
+
             Debug.LogFormat("User ID: {0}", player.UserId);
         }
     }
@@ -48,9 +54,9 @@ public class Server : Photon.MonoBehaviour
 
         if (photonView != null)
         {
-            
             photonView.RPC("SetCustomProp", newPlayer, 100);
             Debug.Log("photonView custom prop set!");
+
         }
         else
         {
