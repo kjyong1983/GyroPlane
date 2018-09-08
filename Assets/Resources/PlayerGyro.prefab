@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpeedUp: 0
   isSpeedDown: 0
+  isFiring: 0
+  bullet: {fileID: 1880744681569078, guid: 5ce2351e93c3e5640b724e1ee7e5049c, type: 2}
 --- !u!114 &114735587917728836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,3 +189,5 @@ MonoBehaviour:
   - {fileID: 1798908582206696, guid: f2ae7322312b46f43a5eb9e1f9ed2d63, type: 2}
   - {fileID: 1451347826877690, guid: e4c629c06951cd24ab6761f625eeb286, type: 2}
   - {fileID: 1174921074057788, guid: 5765c731ab7872b4a9c3b26d1233429a, type: 2}
+  rndNum: 0
+  newObject: {fileID: 0}

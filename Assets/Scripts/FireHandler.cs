@@ -10,10 +10,13 @@ public class FireHandler : ButtonHandler {
     public override void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("fire button pressed");
+        controller.isFiring = true;
+
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("fire button up");
+        controller.isFiring = false;
     }
 }
