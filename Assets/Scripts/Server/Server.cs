@@ -15,7 +15,7 @@ public class Server : Photon.MonoBehaviour
     {
         RoomOptions ro = new RoomOptions();
         ro.PublishUserId = true;
-        PhotonNetwork.CreateRoom("defaultRoom", ro, null);
+        PhotonNetwork.CreateRoom(null, ro, null);
     }
 
     void OnJoinedRoom()
