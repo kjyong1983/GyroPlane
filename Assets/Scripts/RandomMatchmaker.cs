@@ -17,7 +17,9 @@ public class RandomMatchmaker : MonoBehaviour {
 
     void OnPhotonRandomJoinFailed()
     {
-        PhotonNetwork.CreateRoom(null);
+        RoomOptions ro = new RoomOptions();
+        ro.PublishUserId = true;
+        PhotonNetwork.CreateRoom("defaultRoom", ro, null);
     }
 
     void OnJoinedRoom()

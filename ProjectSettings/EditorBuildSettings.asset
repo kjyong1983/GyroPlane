@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AirplaneMultiTest.unity
     guid: cc801fa22dbcae44ba97bde486e041eb
+  - enabled: 1
+    path: Assets/Scenes/Server.unity
+    guid: 0677d4efba0ee954e91d396339769801
   m_configObjects: {}
