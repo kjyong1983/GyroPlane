@@ -14,6 +14,7 @@ public class AirplaneController : Photon.MonoBehaviour {
     float bulletTimer = 0f;
 
     public GameObject bullet;
+    public string nickName;
 
     public int health = 10;
 
@@ -21,7 +22,7 @@ public class AirplaneController : Photon.MonoBehaviour {
     int pitch = 0;
     int roll = 0;
 
-    bool debug = false;
+    bool debug = true;
 
     // Use this for initialization
     void Start () {
@@ -35,11 +36,18 @@ public class AirplaneController : Photon.MonoBehaviour {
         FindObjectOfType<AccelHandler>().controller = this;
         FindObjectOfType<FireHandler>().controller = this;
         FindObjectOfType<BrakeHandler>().controller = this;
+        FindObjectOfType<NickNameInput>().controller = this;
         //FindObjectOfType<CalibrateHandler>().controller = this;
 
     }
 
-    // Update is called once per frame
+    //show nickname
+    void OnGUI()
+    {
+        Vector2 worldPoint = Camera.main.WorldToScreenPoint(transform.position);
+        GUI.Label(new Rect(worldPoint.x - 100, (Screen.height - worldPoint.y) - 50, 200, 100), nickName);
+    }
+
     void Update () {
 
         if (!(photonView.isMine))
