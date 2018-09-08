@@ -22,7 +22,7 @@ public class AirplaneController : Photon.MonoBehaviour {
     int pitch = 0;
     int roll = 0;
 
-    bool debug = true;
+    bool debug = false;
 
     // Use this for initialization
     void Start () {

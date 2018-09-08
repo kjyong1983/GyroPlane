@@ -17,8 +17,11 @@ public class NickNameInput : MonoBehaviour {
     {
         while (true)
         {
-            PhotonNetwork.player.NickName = inputField.text;
-            controller.nickName = inputField.text;
+            if (PhotonNetwork.player != null && inputField != null && controller != null)
+            {
+                PhotonNetwork.player.NickName = inputField.text;
+                controller.nickName = inputField.text;
+            }
             yield return new WaitForSeconds(2);
         }
 
