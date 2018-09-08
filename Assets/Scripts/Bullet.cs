@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    float speed = 5f;
+    float speed = 25f;
     public Vector3 moveDir;
 
 	void Start () {
@@ -19,5 +19,12 @@ public class Bullet : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hit");
+        var other = collision.gameObject.GetComponentInParent<AirplaneController>();
+        if (other != null)
+        {
+
+            Debug.Log(other.gameObject.name + " " + "health : " + other.health);
+        }
+        Destroy(gameObject);
     }
 }

@@ -15,6 +15,8 @@ public class AirplaneController : Photon.MonoBehaviour {
 
     public GameObject bullet;
 
+    public int health = 10;
+
     int yaw = 0;
     int pitch = 0;
     int roll = 0;
@@ -47,7 +49,6 @@ public class AirplaneController : Photon.MonoBehaviour {
 
         //Debug.Log(speed);
 
-
         if (Application.platform == RuntimePlatform.Android)
         {
             UpdateSpeed();
@@ -70,6 +71,11 @@ public class AirplaneController : Photon.MonoBehaviour {
         //FireBullet();
         Vector3 moveDir = (transform.forward).normalized;
         FireBullet(transform.position, moveDir);
+
+        if (health <= 0 )
+        {
+            Destroy(gameObject);
+        }
 
 
     }
@@ -119,26 +125,40 @@ public class AirplaneController : Photon.MonoBehaviour {
         GetComponent<GyroController>().AttachGyro();
     }
     
-    [PunRPC]
     private void FireBullet(Vector3 pos, Vector3 dir)
     {
         if (!photonView.isMine)
             return;
+
 
         bulletTimer += Time.deltaTime;
         if (isFiring)
         {
             if (bulletTimer >= fireRate)
             {
-                var bulletObj = Instantiate(bullet, pos, Quaternion.Euler(dir));
-                bullet.GetComponent<Bullet>().moveDir = dir;
+                InstantiateBullet(pos, dir);
+                //var bulletObj = Instantiate(bullet, pos, Quaternion.Euler(dir));
+                //bullet.GetComponent<Bullet>().moveDir = dir;
                 bulletTimer = 0;
             }
         }
 
-        if (photonView.isMine)
+        photonView.RPC("InstantiateBullet", PhotonTargets.OthersBuffered, pos, dir);
+
+    }
+
+    [PunRPC]
+    private void InstantiateBullet(Vector3 pos, Vector3 dir)
+    {
+        var bulletObj = Instantiate(bullet, pos, Quaternion.Euler(dir));
+        bullet.GetComponent<Bullet>().moveDir = dir;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Bullet>() != null)
         {
-            photonView.RPC("FireBullet", PhotonTargets.OthersBuffered, pos, dir);
+            health -= 5;
         }
     }
 

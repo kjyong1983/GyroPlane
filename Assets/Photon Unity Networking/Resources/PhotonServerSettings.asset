@@ -36,5 +36,5 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
-  - FireBullet
+  - InstantiateBullet
   DisableAutoOpenWizard: 1

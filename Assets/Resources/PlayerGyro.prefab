@@ -173,6 +173,7 @@ MonoBehaviour:
   isSpeedDown: 0
   isFiring: 0
   bullet: {fileID: 1880744681569078, guid: 5ce2351e93c3e5640b724e1ee7e5049c, type: 2}
+  health: 10
 --- !u!114 &114735587917728836
 MonoBehaviour:
   m_ObjectHideFlags: 1
