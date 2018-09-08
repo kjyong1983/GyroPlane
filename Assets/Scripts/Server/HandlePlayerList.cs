@@ -18,24 +18,24 @@ public class HandlePlayerList : MonoBehaviour, IWebResource
     [System.Serializable]
     struct PlayerListResponse
     {
-        public string[] playerList;
+        public Player[] playerList;
+    }
+
+    [System.Serializable]
+    struct Player
+    {
+        public string userId;
+        public int score;
     }
 
     public void HandleRequest(Request request, Response response)
     {
-        Debug.LogFormat("HandleRequest(): Player User ID = {0}", PhotonNetwork.player.UserId);
-        foreach (var player in PhotonNetwork.playerList)
-        {
-            Debug.LogFormat("User ID: {0}", player.UserId);
-        }
-
         response.statusCode = 200;
         response.message = "OK.";
         var playerList = new PlayerListResponse
         {
-            playerList = PhotonNetwork.playerList.Select(e => e.UserId).ToArray()
+            playerList = PhotonNetwork.playerList.Select(e => new Player { userId = e.UserId, score = e.GetScore() }).ToArray()
         };
-        Debug.Log(JsonUtility.ToJson(playerList));
         response.Write(JsonUtility.ToJson(playerList));
     }
 }

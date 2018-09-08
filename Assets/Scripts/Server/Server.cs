@@ -32,6 +32,7 @@ public class Server : MonoBehaviour
         Debug.LogFormat("OnPhotonPlayerConnected(): Player User ID = {0}", PhotonNetwork.player.UserId);
         foreach (var player in PhotonNetwork.playerList)
         {
+            //player.GetScore();
             Debug.LogFormat("User ID: {0}", player.UserId);
         }
     }
