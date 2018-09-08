@@ -137,13 +137,13 @@ public class AirplaneController : Photon.MonoBehaviour {
             if (bulletTimer >= fireRate)
             {
                 InstantiateBullet(pos, dir);
+                photonView.RPC("InstantiateBullet", PhotonTargets.OthersBuffered, pos, dir);
                 //var bulletObj = Instantiate(bullet, pos, Quaternion.Euler(dir));
                 //bullet.GetComponent<Bullet>().moveDir = dir;
                 bulletTimer = 0;
             }
         }
 
-        photonView.RPC("InstantiateBullet", PhotonTargets.OthersBuffered, pos, dir);
 
     }
 
