@@ -8,10 +8,18 @@ public class AirplaneController : Photon.MonoBehaviour {
     const float DEFAULTSPEED = 3f;
     public bool isSpeedUp = false;
     public bool isSpeedDown = false;
+    public bool isFiring = false;
+
+    float fireRate = 0.2f;
+    float bulletTimer = 0f;
+
+    public GameObject bullet;
 
     int yaw = 0;
     int pitch = 0;
     int roll = 0;
+
+    bool debug = false;
 
     // Use this for initialization
     void Start () {
@@ -37,19 +45,33 @@ public class AirplaneController : Photon.MonoBehaviour {
             return;
         }
 
-        Debug.Log(speed);
+        //Debug.Log(speed);
 
-#if UNITY_ANDROID
-        UpdateSpeed();
-#endif
 
-#if UNITY_EDITOR
-        //if you are playing with pc
-        GetKeyBoardInput();
-#endif
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            UpdateSpeed();
+        }
+
+        if (Application.isEditor)
+        {
+            //if you are playing with pc
+            GetKeyBoardInput();
+        }
+
+        if (debug)
+        {
+            speed = 0;
+        }
 
         //move towards as camera view is watching
         transform.position = transform.position + Camera.main.transform.forward * Time.deltaTime * speed;
+
+        //FireBullet();
+        Vector3 moveDir = (transform.forward).normalized;
+        FireBullet(transform.position, moveDir);
+
+
     }
 
     public void GetKeyBoardInput()
@@ -94,10 +116,31 @@ public class AirplaneController : Photon.MonoBehaviour {
 
     public void CalibrateGyro()
     {
-        //GetComponent<GyroControl>().Calibrate();
         GetComponent<GyroController>().AttachGyro();
     }
+    
+    [PunRPC]
+    private void FireBullet(Vector3 pos, Vector3 dir)
+    {
+        if (!photonView.isMine)
+            return;
 
+        bulletTimer += Time.deltaTime;
+        if (isFiring)
+        {
+            if (bulletTimer >= fireRate)
+            {
+                var bulletObj = Instantiate(bullet, pos, Quaternion.Euler(dir));
+                bullet.GetComponent<Bullet>().moveDir = dir;
+                bulletTimer = 0;
+            }
+        }
+
+        if (photonView.isMine)
+        {
+            photonView.RPC("FireBullet", PhotonTargets.OthersBuffered, pos, dir);
+        }
+    }
 
 }
 

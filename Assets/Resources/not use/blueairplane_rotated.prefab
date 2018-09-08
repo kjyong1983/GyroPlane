@@ -113,6 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525416956793076}
+  - component: {fileID: 65094649581525328}
   m_Layer: 0
   m_Name: blueairplane_rotated
   m_TagString: Untagged
@@ -658,6 +659,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1304739434260226}
   m_Mesh: {fileID: 4300004, guid: 26718a698f89d5a43b1fc9c783b7659a, type: 3}
+--- !u!65 &65094649581525328
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451347826877690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 8}
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!95 &95254409593189022
 Animator:
   serializedVersion: 3
