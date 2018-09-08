@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114666072985044578}
   - component: {fileID: 65613810367556248}
   - component: {fileID: 54753898702201776}
+  - component: {fileID: 114990177243359292}
   m_Layer: 0
   m_Name: PlayerGyro
   m_TagString: Untagged
@@ -222,3 +223,16 @@ MonoBehaviour:
   - {fileID: 1174921074057788, guid: 5765c731ab7872b4a9c3b26d1233429a, type: 2}
   rndNum: 0
   newObject: {fileID: 0}
+--- !u!114 &114990177243359292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210416613604254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36c5028c8d976542b4a3e6f022ee20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 1756509070997670, guid: 1c18ecc3f0519dc4eb1aa15bf9042173, type: 2}

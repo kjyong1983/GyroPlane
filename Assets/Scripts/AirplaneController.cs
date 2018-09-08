@@ -44,8 +44,11 @@ public class AirplaneController : Photon.MonoBehaviour {
     //show nickname
     void OnGUI()
     {
+        GUIStyle guiStyle = new GUIStyle();
+        guiStyle.fontSize = 25;
+
         Vector2 worldPoint = Camera.main.WorldToScreenPoint(transform.position);
-        GUI.Label(new Rect(worldPoint.x - 100, (Screen.height - worldPoint.y) - 50, 200, 100), nickName);
+        GUI.Label(new Rect(worldPoint.x - 100, (Screen.height - worldPoint.y) - 50, 200, 100), nickName, guiStyle);
     }
 
     void Update () {
@@ -82,7 +85,8 @@ public class AirplaneController : Photon.MonoBehaviour {
 
         if (health <= 0 )
         {
-            Destroy(gameObject);
+            GetComponent<ParticlePlayer>().PlayEffect(0);
+            Destroy(gameObject,5f);
         }
 
 
@@ -166,6 +170,7 @@ public class AirplaneController : Photon.MonoBehaviour {
     {
         if (collision.gameObject.GetComponent<Bullet>() != null)
         {
+            GetComponent<ParticlePlayer>().PlayEffect(0);
             health -= 5;
         }
     }
