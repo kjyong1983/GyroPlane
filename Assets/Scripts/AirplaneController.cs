@@ -39,14 +39,25 @@ public class AirplaneController : Photon.MonoBehaviour {
 
         Debug.Log(speed);
 
-#if UNITY_ANDROID
-        UpdateSpeed();
-#endif
 
-#if UNITY_EDITOR
-        //if you are playing with pc
-        GetKeyBoardInput();
-#endif
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            UpdateSpeed();
+        }
+
+        if (Application.isEditor)
+        {
+            //if you are playing with pc
+            GetKeyBoardInput();
+        }
+        //#if UNITY_ANDROID
+        //        UpdateSpeed();
+        //#endif
+
+        //#if UNITY_EDITOR
+        //        //if you are playing with pc
+        //        GetKeyBoardInput();
+        //#endif
 
         //move towards as camera view is watching
         transform.position = transform.position + Camera.main.transform.forward * Time.deltaTime * speed;
